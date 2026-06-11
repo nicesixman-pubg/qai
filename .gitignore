@@ -11,3 +11,4 @@ data/reference/
 *.onnx
 .DS_Store
 .claude/settings.local.json
+qai-test/
