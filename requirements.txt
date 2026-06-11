@@ -1,0 +1,30 @@
+# qAI - 투명화 버그 QA 트리아지 (CPU 전용 MVP)
+# Python 3.10+ 권장
+
+# --- 핵심 ---
+numpy>=1.24,<2.1
+pillow>=10.0
+opencv-python>=4.8
+pydantic>=2.5
+python-dotenv>=1.0
+
+# --- UI ---
+streamlit>=1.30
+
+# --- 탐지 + 세그멘테이션 (CPU) ---
+# torch CPU 휠은 별도 설치 권장:
+#   pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu
+torch>=2.1
+torchvision>=0.16
+ultralytics>=8.1        # YOLO11-seg / YOLOv8-seg (person)
+
+# --- 누끼 / 배경 제거 ---
+rembg>=2.0
+onnxruntime>=1.16        # rembg CPU 백엔드
+
+# --- 포즈 / 관절 (선택, 미지원 시 bbox 비율 fallback) ---
+mediapipe>=0.10 ; python_version < "3.13"
+
+# --- VLM 판정 ---
+anthropic>=0.40          # MVP 기본
+openai>=1.40             # 옵션 (키 없으면 비활성)

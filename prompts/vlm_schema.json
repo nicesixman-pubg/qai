@@ -1,0 +1,101 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "final_label": {
+      "type": "string",
+      "enum": ["normal", "suspicious", "bug"]
+    },
+    "safe_to_autopass": {
+      "type": "boolean"
+    },
+    "confidence": {
+      "type": "number",
+      "minimum": 0.0,
+      "maximum": 1.0
+    },
+    "reference_match_quality": {
+      "type": "number",
+      "minimum": 0.0,
+      "maximum": 1.0
+    },
+    "candidate_ids_reviewed": {
+      "type": "array",
+      "items": {"type": "string"}
+    },
+    "defects": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "candidate_id": {"type": "string"},
+          "bbox": {
+            "type": "array",
+            "items": {"type": "integer"},
+            "minItems": 4,
+            "maxItems": 4
+          },
+          "region_hint": {
+            "type": "string",
+            "enum": ["waist", "left_wrist", "right_wrist", "left_ankle", "right_ankle", "neck", "torso", "armpit", "other"]
+          },
+          "bug_type": {
+            "type": "string",
+            "enum": ["background_leakage", "missing_mesh", "skin_exposure", "clothing_clipping", "layer_overlap", "segmentation_uncertain", "reference_mismatch"]
+          },
+          "severity": {
+            "type": "string",
+            "enum": ["low", "medium", "high"]
+          },
+          "evidence": {"type": "string"}
+        },
+        "required": ["candidate_id", "bbox", "region_hint", "bug_type", "severity", "evidence"]
+      }
+    },
+    "affected_regions": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["waist", "left_wrist", "right_wrist", "left_ankle", "right_ankle", "neck", "torso", "armpit", "other"]
+      }
+    },
+    "bug_types": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["background_leakage", "missing_mesh", "skin_exposure", "clothing_clipping", "layer_overlap", "segmentation_uncertain", "reference_mismatch"]
+      }
+    },
+    "visual_evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "region": {"type": "string"},
+          "description": {"type": "string"},
+          "severity": {"type": "string", "enum": ["low", "medium", "high"]}
+        },
+        "required": ["region", "description", "severity"]
+      }
+    },
+    "intentional_design_possible": {"type": "boolean"},
+    "needs_human_review": {"type": "boolean"},
+    "reason": {"type": "string"}
+  },
+  "required": [
+    "final_label",
+    "safe_to_autopass",
+    "confidence",
+    "reference_match_quality",
+    "candidate_ids_reviewed",
+    "defects",
+    "affected_regions",
+    "bug_types",
+    "visual_evidence",
+    "intentional_design_possible",
+    "needs_human_review",
+    "reason"
+  ]
+}
